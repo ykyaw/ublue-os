@@ -9,8 +9,20 @@ set -ouex pipefail
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
+dnf5 -y remove \
+  firefox \
+  firefox-langpacks
+
 # this installs a package from fedora repos
-dnf5 install -y tmux 
+dnf5 -y install \
+  distrobox \
+  fish \
+  gnome-themes-extra \
+  gnome-tweaks \
+  neovim \
+  nodejs \
+  papirus-icon-theme \
+  zoxide
 
 # Use a COPR Example:
 #
@@ -18,7 +30,15 @@ dnf5 install -y tmux
 # dnf5 -y install package
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
+dnf5 -y copr enable peterwu/rendezvous
+dnf5 -y install bibata-cursor-themes
+
+dnf5 -y copr enable scottames/ghostty
+dnf5 -y install ghostty
+
+dnf5 -y copr enable atim/starship
+dnf5 -y install starship
 
 #### Example for enabling a System Unit File
 
-systemctl enable podman.socket
+# systemctl enable podman.socket
